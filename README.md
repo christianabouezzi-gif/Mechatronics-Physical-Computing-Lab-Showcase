@@ -44,8 +44,8 @@ A structural engineering design project centered around building and testing a s
 
 # Methodology & Code Structure
 * Parametric MATLAB Adjustments: The engineering process involved executing an analytical program loop in MATLAB, altering structural coordinates piece by piece to identify the ideal spatial layout.
-* Force Proportionality Modeling: An automated algorithm mapped structural element force limits relative to a total applied system mass (W_fail) using individual component constants (R) inside the equation Length=R⋅W_fail.
-* Buckling Tolerance Calculations: Compressive resistance thresholds were calculated across every structural element via the power equation W=3054.789⋅L^−2.009 to pinpoint immediate failure zones based on length (L).
+* Force Proportionality Modeling: An automated algorithm mapped structural element force limits relative to a total applied system mass (W_{fail}) using individual component constants (R) inside the equation Length=R⋅W_{fail}.
+* Buckling Tolerance Calculations: Compressive resistance thresholds were calculated across every structural element via the power equation W=3054.789⋅L^{−2.009} to pinpoint immediate failure zones based on length (L).
 * Structural Geometry Balancing: The final design introduced a rounded upper profile to distribute localized pressure vectors more uniformly away from solitary critical peaks.
 # Results & Key Findings
 
