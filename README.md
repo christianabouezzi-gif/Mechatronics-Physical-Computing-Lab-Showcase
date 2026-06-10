@@ -14,8 +14,9 @@ This repository includes
 ## Hygiene Dispenser
 
 A gesture-controlled hygiene dispenser designed to deliver multiple products using sensor-based user input and automated mechanical actuation.
-
-<img width="512" height="355" alt="unnamed-3" src="https://github.com/user-attachments/assets/968265f1-e833-4607-af0e-e8c11fbc575c" />
+<p align="center">
+ <img width="512" height="355" alt="unnamed-3" src="https://github.com/user-attachments/assets/968265f1-e833-4607-af0e-e8c11fbc575c" />
+<p
 
 
 ### Key Features
@@ -51,7 +52,9 @@ A gesture-controlled hygiene dispenser designed to deliver multiple products usi
 
 A MATLAB-based structural analysis project used to evaluate a 15-member truss system and predict structural failure under load.
 
-<img width="1237" height="775" alt="bridge" src="https://github.com/user-attachments/assets/e90e91e1-a555-4ce7-9d23-b9be32c600f5" />
+<p align="center">
+ <img width="1237" height="775" alt="bridge" src="https://github.com/user-attachments/assets/e90e91e1-a555-4ce7-9d23-b9be32c600f5" />
+<p
 
 
 ### Key Features
@@ -86,7 +89,9 @@ A MATLAB-based structural analysis project used to evaluate a 15-member truss sy
 ## Digital Thermometer
 An Arduino-based temperature monitoring system that measures ambient temperature and provides real-time visual and audio feedback.
 
-<img width="512" height="372" alt="unnamed-2" src="https://github.com/user-attachments/assets/211e46dd-6366-4a72-9794-fcc98178d4c9" />
+<p align="center">
+ <img width="512" height="372" alt="unnamed-2" src="https://github.com/user-attachments/assets/211e46dd-6366-4a72-9794-fcc98178d4c9" />
+<p
 
 ### Key Features
 
