@@ -74,7 +74,7 @@ Install in Arduino IDE:
 
 | Gesture | Action | Product |
 |--------|--------|---------|
-| DOWN | Dispense roll | Toilet paper |
+| DOWN/PROXIMITY | Dispense roll | Toilet paper |
 | LEFT | Dispense pad | Pads |
 | RIGHT | Dispense tampon | Tampons |
 
