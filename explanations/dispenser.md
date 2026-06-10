@@ -124,13 +124,4 @@ Install in Arduino IDE:
 - Rolls max: 8 uses  
 - Stepper speed: 10 RPM  
 - 2s delay added after roll gesture  
-
----
-
-## Possible Improvements
-- Restore EEPROM values on startup  
-- Add gesture debounce  
-- Add refill/reset button  
-- Add OLED display  
-- Improve power separation  
-- Replace `delay()` with `millis()`  
+ 
