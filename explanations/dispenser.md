@@ -91,3 +91,47 @@ Install in Arduino IDE:
 ### Gesture Detection
 ```cpp
 uint8_t gesture = apds.readGesture();
+
+## Roll Dispensing (DOWN)
+- Uses proximity detection  
+- Motor runs until object is gone  
+- Auto safety stop  
+
+---
+
+## Pad Dispensing (LEFT)
+- Rotates motor 1/3 revolution  
+- Increments counter  
+- Saves to EEPROM  
+
+---
+
+## Tampon Dispensing (RIGHT)
+- Rotates motor 1/7 revolution  
+- Increments counter  
+- Turns LED OFF at max capacity  
+
+---
+
+## EEPROM Usage
+- `counterPad → address 1`  
+- `counterTamp → address 2`  
+
+---
+
+## System Behavior
+- Pads max: 3 uses  
+- Tampons max: 6 uses  
+- Rolls max: 8 uses  
+- Stepper speed: 10 RPM  
+- 2s delay added after roll gesture  
+
+---
+
+## Possible Improvements
+- Restore EEPROM values on startup  
+- Add gesture debounce  
+- Add refill/reset button  
+- Add OLED display  
+- Improve power separation  
+- Replace `delay()` with `millis()`  
