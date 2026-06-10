@@ -50,5 +50,4 @@ A structural engineering design project centered around building and testing a s
 # Results & Key Findings
 
 * Critical Buckling Peak: Member 7 (a 7-inch piece) was identified as the absolute critical member, exhibiting a precise calculated local buckling threshold of 61.26 oz.
-* Load Metrics: The design achieved a final estimated failure capacity of 65.698 oz against a calculated build expense of \$223.66, yielding a precise operational efficiency factor of yielding a precise operational efficiency factor of 0.2937 oz/$.
 * Uncertainty Bounds: Risk analysis highlighted Member 8 as a highly volatile element whose lower structural tolerance bound (+/- 1.36 oz) places it directly in danger of early failure before Member 7 under load.
