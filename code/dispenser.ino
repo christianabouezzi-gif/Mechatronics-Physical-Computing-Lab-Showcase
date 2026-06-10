@@ -1,144 +1,141 @@
-## Code
-
 #include <Stepper.h>
 #include "Adafruit_APDS9960.h"
 #include <EEPROM.h>
 
-
-// Define the interrupt pin
+// Interrupt pin for gesture sensor
 #define INT_PIN A3
 
-
-// For your motor
 Adafruit_APDS9960 apds;
 
-
-// Change this to fit the number of steps per revolution
+// Stepper motor configuration
 const int stepsPerRevolution = 2038;
 
+Stepper stepperPad(stepsPerRevolution, 2, 4, 3, 5);
+Stepper stepperTamp(stepsPerRevolution, 6, 8, 7, 9);
+Stepper stepperRoll(stepsPerRevolution, 10, 12, 11, 13);
 
-// Initialize the stepper library on pins 8 through 11:
-Stepper myStepper2(stepsPerRevolution, 2,4,3,5);
-Stepper myStepper(stepsPerRevolution, 6,8,7,9);
-Stepper myStepper3(stepsPerRevolution, 10,12,11,13);
+// Counters for each product
+int counterTamp = 0;
+int counterPad = 0;
+int counterRoll = 0;
 
+// Maximum usage thresholds
+int maxPads = 3;
+int maxTamps = 6;
+int maxRoll = 8;
 
-//LED counters
-int counterLEDtamp=0;
-int counterLEDpad=0;
-int counterLEDroll=0;
+//for the pins
+const int ledTamp = A2;
+const int ledPad  = A5;
+const int ledRoll = A4;
 
-
-// Set max numbers of products here
-int numPads=3;
-int numTamps=6;
-int numRoll=8;
-
-
-//LED pins
-const int ledPinTamp= A2;
-const int ledPinPad= A5;
-const int ledPinRoll=A4;
 
 void setup() {
-Serial.begin(115200);
-pinMode(ledPinTamp,OUTPUT);
-pinMode(ledPinRoll, OUTPUT);
-pinMode(ledPinPad,OUTPUT);
-pinMode(INT_PIN, INPUT_PULLUP);  // Define the INT_PIN as INPUT_PULLUP
+  Serial.begin(115200);
 
+  pinMode(ledTamp, OUTPUT);
+  pinMode(ledPad, OUTPUT);
+  pinMode(ledRoll, OUTPUT);
+  pinMode(INT_PIN, INPUT_PULLUP);
 
-digitalWrite(ledPinTamp, HIGH);
-digitalWrite(ledPinRoll, HIGH);
-digitalWrite(ledPinPad, HIGH);
-// // setting LEDs on, read from past counter
-// //if user turns off and on the device, check if past counters were above max, that means they refilled, so reset counters to 0
-// counterLEDroll = EEPROM.read(0);
-// counterLEDpad = EEPROM.read(1);
-// counterLEDtamp = EEPROM.read(2);
+  // Turn LEDs ON initially
+  digitalWrite(ledTamp, HIGH);
+  digitalWrite(ledPad, HIGH);
+  digitalWrite(ledRoll, HIGH);
 
+  // Reset counters (you can replace with EEPROM restore if needed)
+  counterRoll = 0;
+  counterPad = 0;
+  counterTamp = 0;
 
-//reset the counters
-counterLEDroll=0;
-counterLEDpad =0;
-counterLEDtamp=0;
+  // Initialize APDS9960 sensor
+  if (!apds.begin()) {
+    Serial.println("APDS9960 initialization failed!");
+    while (1);
+  } else {
+    Serial.println("APDS9960 initialized successfully.");
+  }
 
-if(!apds.begin()){
- Serial.println("Failed to initialize device! Please check your wiring.");
-} else {
- Serial.println("Device initialized!");
-}
+  // Enable sensor features
+  apds.enableProximity(true);
+  apds.enableGesture(true);
+  apds.setProximityInterruptThreshold(0, 175);
+  apds.enableProximityInterrupt();
 
-
-apds.enableProximity(true);
-apds.enableGesture(true);
-apds.setProximityInterruptThreshold(0, 175);  // Set the proximity interrupt threshold
-apds.enableProximityInterrupt(); // Enable the proximity interrupt
-myStepper.setSpeed(10);
-myStepper2.setSpeed(10);
-myStepper3.setSpeed(10);
+  // Set stepper speed
+  stepperPad.setSpeed(10);
+  stepperTamp.setSpeed(10);
+  stepperRoll.setSpeed(10);
 }
 
 void loop() {
 
+  uint8_t gesture = apds.readGesture();
 
-uint8_t gesture = apds.readGesture();
+  Serial.print("Gesture: ");
+  Serial.println(gesture);
 
+  //Down gesture
+  if (gesture == APDS9960_DOWN) {
 
-// Debugging: Print gesture value
-Serial.print("Gesture: ");
-Serial.println(gesture);
+    Serial.println("Down gesture detected (Roll)");
 
+    counterRoll++;
 
-if(gesture == APDS9960_DOWN) {
-Serial.println("up gesture detected");
-Serial.println("^");
-counterLEDroll++;
-if(counterLEDroll >=6) {
- digitalWrite(ledPinRoll, LOW); // set LED off
- }
-delay(2000);
-  apds.enableProximity(false);
-  apds.enableGesture(false);
-uint8_t prox = apds.readProximity();
-while(prox!=0){
- apds.enableProximity(true);
- apds.clearInterrupt();
-myStepper3.step(-100);
-prox = apds.readProximity();
-Serial.println(prox);
-}
-apds.enableGesture(true);
-myStepper3.step(0);
-}
+    if (counterRoll >= maxRoll) {
+      digitalWrite(ledRoll, LOW);
+    }
 
+    delay(2000);
 
-// Check for gesture
-if(gesture == APDS9960_LEFT) {
- Serial.println("Left gesture detected");
- counterLEDpad++; // increment
- EEPROM.write(1, counterLEDpad); // write to EEPROM to save variable
- Serial.println("<");
- myStepper2.step(-stepsPerRevolution/3);
- delay(500);
- //if(counterLEDpad >=2) {
- //  myStepper2.step((2*stepsPerRevolution)/3);
- //  digitalWrite(ledPinPad, LOW);
- //}
- }
+    apds.enableProximity(false);
+    apds.enableGesture(false);
 
+    uint8_t prox = apds.readProximity();
 
-if(gesture == APDS9960_RIGHT) {
- Serial.println("Right gesture detected");
- counterLEDtamp++; // increment
-   Serial.print("Counter Tamp: ");
-   Serial.print(counterLEDtamp);
- if(counterLEDtamp >=6) {
- digitalWrite(ledPinTamp, LOW); // set LED off
- }
- EEPROM.write(2, counterLEDtamp); // write to EEPROM to save variable
- Serial.println(">");
- myStepper.step(stepsPerRevolution/7);
- delay(500);
- }
+   //checks proximity
+    while (prox != 0) {
+      apds.enableProximity(true);
+      apds.clearInterrupt();
+
+      stepperRoll.step(-100);
+
+      prox = apds.readProximity();
+      Serial.println(prox);
+    }
+
+    apds.enableGesture(true);
+    stepperRoll.step(0);
+  }
+
+  //left gesture
+  if (gesture == APDS9960_LEFT) {
+
+    Serial.println("Left gesture detected (Pad)");
+
+    counterPad++;
+    EEPROM.write(1, counterPad);
+
+    stepperPad.step(-stepsPerRevolution / 3);
+
+    delay(500);
+  }
+
+  //right gesture
+  if (gesture == APDS9960_RIGHT) {
+
+    Serial.println("Right gesture detected (Tampon)");
+
+    counterTamp++;
+
+    if (counterTamp >= maxTamps) {
+      digitalWrite(ledTamp, LOW);
+    }
+
+    EEPROM.write(2, counterTamp);
+
+    stepperTamp.step(stepsPerRevolution / 7);
+
+    delay(500);
+  }
 }
