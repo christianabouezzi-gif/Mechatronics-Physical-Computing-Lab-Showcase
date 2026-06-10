@@ -35,7 +35,7 @@ A gesture-controlled hygiene dispenser designed to deliver multiple products usi
 * Requires stable 5V power supply (2A recommended) for full torque operation
 * Installation limited to locations with accessible power sources
 
-### Technology Used
+### Technologies Used
 * Arduino
 * C++
 * APDS9960 Gesture Sensor
@@ -102,7 +102,7 @@ An Arduino-based temperature monitoring system that measures ambient temperature
 * Stable performance under continuous operation
 * Battery-powered operation requires power optimization for long-term use
 
-### Technology Used
+### Technologies Used
 
 * Arduino
 * TMP36 Temperature Sensor
