@@ -58,8 +58,10 @@ Arduino reads this using ADC:
 ---
 
 ### Voltage Conversion
-Voltage = analogRead(A0) * (5.0 / 1023.0)
+
 ---
+Voltage = analogRead(A0) * (5.0 / 1023.0)
+
 
 ### Temperature Conversion (TMP36)
 Temperature (°C) = (Voltage - 0.5) * 100
