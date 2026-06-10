@@ -51,3 +51,24 @@ A structural engineering design project centered around building and testing a s
 
 * Critical Buckling Peak: Member 7 (a 7-inch piece) was identified as the absolute critical member, exhibiting a precise calculated local buckling threshold of 61.26 oz.
 * Uncertainty Bounds: Risk analysis highlighted Member 8 as a highly volatile element whose lower structural tolerance bound (+/- 1.36 oz) places it directly in danger of early failure before Member 7 under load.
+
+# Digital Thermometer
+An Arduino-driven climate monitoring system designed to provide real-time alerts when ambient temperatures drift out of a designated homeostatic zone. The device provides immediate sensory notification via integrated visual, audio, and text readouts.
+
+#Key Features
+
+* Dual Thermal Scaling: Internal computational routines parse a single sensor channel to output active conditions in both Celsius and Fahrenheit simultaneously.
+* Acoustic Background Stream: An ongoing multi-note background loop plays a continuous musical track throughout active sampling cycles.
+* Multi-Stage Visual Indicators: An integrated configuration utilizes a continuous green LED for power status and a flashing red LED for extreme thermal boundary alerts.
+
+# Methodology & Code Structure
+* Signal Capture & Interpolation: The micro-controller samples an analog pin (analogRead(tmp)) tied to a TMP36 thermal IC, converting raw voltage levels directly into a metric index via calibrated formulas (voltage / 1024.0).
+* Dynamic Boundary Testing: An active comparative check loop (if (tempF < 68 || tempF > 75)) continuously tests ambient metrics against safe upper and lower boundaries.
+* Asynchronous Note Synthesis: A specialized buzzer routine interprets nested arrays of pitch values (melody[note]) and relative durations (1000 / durations[note]) to synthesize clear acoustic frequencies using precise delay gates.
+* I2C Display Communication: Data strings are sent through dedicated signal lines to update an alphanumeric 16x2 LCD panel (lcd.print(tempF)) every time the alert tune finishes.
+
+# Results & Key Findings
+
+* Alert Execution: The prototype successfully executes real-time emergency beeps and red LED strobes whenever temperatures breach the safe operational baseline.
+* Power Management Constraints: The circuit draws its power from a 9V battery source through a built-in step-down transformer block, requiring careful consideration of power longevity during remote operations.
+* Hardware Limitations: Evaluation notes indicated that the 16x2 LCD backlight requires precise mounting positions inside the custom enclosure lid to ensure readability during active room testing.
