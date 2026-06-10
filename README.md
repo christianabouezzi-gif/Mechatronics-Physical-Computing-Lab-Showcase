@@ -72,3 +72,5 @@ An Arduino-driven climate monitoring system designed to provide real-time alerts
 * Alert Execution: The prototype successfully executes real-time emergency beeps and red LED strobes whenever temperatures breach the safe operational baseline.
 * Power Management Constraints: The circuit draws its power from a 9V battery source through a built-in step-down transformer block, requiring careful consideration of power longevity during remote operations.
 * Hardware Limitations: Evaluation notes indicated that the 16x2 LCD backlight requires precise mounting positions inside the custom enclosure lid to ensure readability during active room testing.
+# 
+Author: Christian Abou-Ezzi
