@@ -16,10 +16,10 @@ A gesture-controlled smart dispenser designed around an advanced sensor layout t
 
 The device leverages an array of hardware and software components to deliver reliable tactile operation:
 
-   • Gesture Interactivity: An embedded sensor processes structural proximity measurements and tracks directional user signals.
+* Gesture Interactivity: An embedded sensor processes structural proximity measurements and tracks directional user signals.
   
-   • Multi-Product Mechanics: The architecture utilizes a set of independent mechanical motor lines to physically push outward three 
-     target items: pads, tampons, and toilet paper.
+* Multi-Product Mechanics: The architecture utilizes a set of independent mechanical motor lines to physically push outward three
+target items: pads, tampons, and toilet paper.
   
-   • System Toggles: Includes an active tracking switch loop to seamlessly disconnect the internal logic from the active power grid 
-     during servicing.
+* System Toggles: Includes an active tracking switch loop to seamlessly disconnect the internal logic from the active power grid 
+during servicing.
