@@ -89,7 +89,6 @@ Install in Arduino IDE:
 - Initializes counters  
 
 ### Gesture Detection
-```cpp
 uint8_t gesture = apds.readGesture();
 
 ## Roll Dispensing (DOWN)
